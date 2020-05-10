@@ -109,7 +109,8 @@ const Books = mongoose.model('books', bookSchema);
  * ---------------------------------------------------------------------
  */
 mongoose
-	.connect('mongodb://public:public@localhost:27017/livres?authSource=admin', {
+	.connect('mongodb+srv://public:public@dyma-noq8b.mongodb.net/test?retryWrites=true&w=majority?authSource=admin', {
+		
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,
@@ -530,66 +531,66 @@ mongoose
          *          Sinon j'enregistre dans la base de donnée avec un new Authors.
          * ----------------------------------------------------------------------------------------
          **/
-		Books.countDocuments({ title: 'HTML 5 - Une référence pour le développeur web' }, (err, compteur) => {
-			if (err) throw err;
-			if (compteur > 0) {
-				switch (compteur) {
-					case 1:
-						console.log(
-							' ℹ'.brightCyan,
-							'- Il y a une correspondance dans la base de donnée "books".'.italic.brightCyan
-						);
-						console.log(
-							'❌ - Création impossible (Books) :'.bold.brightRed,
-							'Ce livre a déjà été enrgistré dans la base de donnée.'.red
-						);
-						break;
-					default:
-						console.log(
-							' ℹ'.brightCyan,
-							`- Il y a ${compteur} correspondances dans la base de donnée "books".`.italic.brightCyan
-						);
-						console.log(
-							'❌ - Création impossible (Books) :'.bold.brightRed,
-							'Ce livre a déjà été enrgistré plusieurs fois dans la base de donnée.'.red
-						);
-						break;
-				}
-			} else {
-				const eyrolles = new Editors();
-				eyrolles._id = Editors.findOne({ name: 'Eyrolles' })
-					.exec()
-					.then((currentEditor) => {
-						return currentEditor._id;
-					})
-					.catch((error) => console.error(error));
-				eyrolles.save();
+		// Books.countDocuments({ title: 'HTML 5 - Une référence pour le développeur web' }, (err, compteur) => {
+		// 	if (err) throw err;
+		// 	if (compteur > 0) {
+		// 		switch (compteur) {
+		// 			case 1:
+		// 				console.log(
+		// 					' ℹ'.brightCyan,
+		// 					'- Il y a une correspondance dans la base de donnée "books".'.italic.brightCyan
+		// 				);
+		// 				console.log(
+		// 					'❌ - Création impossible (Books) :'.bold.brightRed,
+		// 					'Ce livre a déjà été enrgistré dans la base de donnée.'.red
+		// 				);
+		// 				break;
+		// 			default:
+		// 				console.log(
+		// 					' ℹ'.brightCyan,
+		// 					`- Il y a ${compteur} correspondances dans la base de donnée "books".`.italic.brightCyan
+		// 				);
+		// 				console.log(
+		// 					'❌ - Création impossible (Books) :'.bold.brightRed,
+		// 					'Ce livre a déjà été enrgistré plusieurs fois dans la base de donnée.'.red
+		// 				);
+		// 				break;
+		// 		}
+		// 	} else {
+		// 		const eyrolles = new Editors();
+		// 		eyrolles._id = Editors.findOne({ name: 'Eyrolles' })
+		// 			.exec()
+		// 			.then((currentEditor) => {
+		// 				return currentEditor._id;
+		// 			})
+		// 			.catch((error) => console.error(error));
+		// 		eyrolles.save();
 
-				const anAuthor = new Authors();
-				anAuthor._id = Authors.findOne({ firstname: 'Rodolphe', lastname: 'Rimelé' })
-					.exec()
-					.then((currentAuthor) => {
-						return currentAuthor._id;
-					})
-					.catch((error) => console.error(error));
-				anAuthor.save();
+		// 		const anAuthor = new Authors();
+		// 		anAuthor._id = Authors.findOne({ firstname: 'Rodolphe', lastname: 'Rimelé' })
+		// 			.exec()
+		// 			.then((currentAuthor) => {
+		// 				return currentAuthor._id;
+		// 			})
+		// 			.catch((error) => console.error(error));
+		// 		anAuthor.save();
 
-				Books.create({
-					title: 'HTML 5 - Une référence pour le développeur web',
-					info: {
-						color: true,
-						pages: 603,
-						chapters: 20
-					},
-					editor_id: eyrolles._id,
-					author_id: anAuthor._id
-				})
-					.then(() => {
-						console.log(`✅ - Livre ajouté avec succès!`.bold.brightGreen);
-					})
-					.catch((err) => console.error(err));
-			}
-		});
+		// 		Books.create({
+		// 			title: 'HTML 5 - Une référence pour le développeur web',
+		// 			info: {
+		// 				color: true,
+		// 				pages: 603,
+		// 				chapters: 20
+		// 			},
+		// 			editor_id: eyrolles._id,
+		// 			author_id: anAuthor._id
+		// 		})
+		// 			.then(() => {
+		// 				console.log(`✅ - Livre ajouté avec succès!`.bold.brightGreen);
+		// 			})
+		// 			.catch((err) => console.error(err));
+		// 	}
+		// });
 
 		/**
          * READ ALL
