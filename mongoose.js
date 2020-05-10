@@ -109,7 +109,7 @@ const Books = mongoose.model('books', bookSchema);
  * ---------------------------------------------------------------------
  */
 mongoose
-	.connect('mongodb://zyrass:eronaele@localhost:27017/livres?authSource=admin', {
+	.connect('mongodb://public:public@localhost:27017/livres?authSource=admin', {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,
